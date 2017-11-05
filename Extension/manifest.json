@@ -1,0 +1,25 @@
+{
+    "name": "Deep Mined",
+    "manifest_version": 2,
+    "version":"1.0",
+    "description":"A toolbar to implement context search",
+    "browser_action": {
+        "default_title": "Deep Mined",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts":["background.js"]
+    },
+    "content_scripts": [{
+        "matches": ["http://*/*","https://*/*"],
+        "js": ["content.js"]
+    }],
+    "permissions": [
+        "activeTab",
+        "background",
+        "tabs",
+        "http://*/*",
+        "https://*/*"
+    ]
+
+}
