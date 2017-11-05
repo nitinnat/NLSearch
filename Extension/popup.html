@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+      <style>
+      input[type=text] {
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding-left: 40px;
+        }
+      </style>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  </head>
   <body>
-    <input id="boo" type="text"> </input>
-    <button id="test">TEST!</button>
+    <div class="container form-group">
+        <input name="name" class="form-control" id="boo" type="text"> </input>
+        <button class="btn btn-success" id="test">TEST!</button>
+    </div>
     <script src="test.js"></script>
   </body>
 </html>
