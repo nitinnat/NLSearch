@@ -7,7 +7,7 @@
 from flask import Flask,jsonify,request
 from numpy.linalg import norm
 app = Flask(__name__)
-	
+
 
 ##Form doc vectors from Glove word vectors.
 
@@ -30,7 +30,7 @@ def tag_visible(element):
 def text_from_html(body):
     soup = BeautifulSoup(body, 'html.parser')
     texts = soup.findAll(text=True)
-    visible_texts = filter(tag_visible, texts)  
+    visible_texts = filter(tag_visible, texts)
     return u" ".join(t.strip() for t in visible_texts)
 
 def process_data(text_array):
@@ -50,7 +50,7 @@ def load_word_vectors(fpath):
         word_vectors[word] = np.array([float(s) for s in line.split()[1:]])
     f.close()
     return word_vectors
-   
+
 
 
 #Form the document vectors using existing word vectors
@@ -61,15 +61,15 @@ def form_doc_vectors(sen_list, word_vectors):
     sen_vecs = []
     for sen in sen_list:
         words = sen.split()
-        
+
         vec = np.array([word_vectors[w] for w in words if w in word_vectors.keys()])
         min_vec = np.min(vec,axis=0)
         max_vec = np.max(vec,axis=0)
         #Concatenate min and max horizontally
-       
+
         doc_vec = np.hstack((min_vec,max_vec)).tolist()
         sen_vecs.append(doc_vec)
-        
+
     return sen_vecs
 
 def form_query_vec(query, word_vectors):
@@ -97,14 +97,15 @@ def find_dists(query_vec, sen_vecs):
     return min_indices, min_dists
 
 def docvecs(dump):
-    original_text = dump.split('\n')
+    dump = text_from_html(dump)
+    original_text = dump.split('.')
     text = re.sub(r'[^\x00-\x7F]+','', dump)
-    text_array2 = text.split('\n')
+    text_array2 = text.split('.')
     text_inds = [i for i in range(len(text_array2)) if text_array2[i] != '' and len(text_array2[i].split()) > 5]
     text_array = [text_array2[i] for i in text_inds]
     original_text = [original_text[i] for i in text_inds]
     text_array = process_data(text_array)
-    
+
     f = open("temp.txt",'a')
     for line in text_array:
         f.write(line)
@@ -115,7 +116,7 @@ def docvecs(dump):
     min_count = 1
     sampling_threshold = 1e-5
     negative_size = 5
-    train_epoch = 100
+    train_epoch = 1
     dm = 0 #0 = dbow; 1 = dmpv
     worker_count = 1 #number of parallel processes
     #pretrained word embeddings
@@ -136,7 +137,7 @@ def docvecs(dump):
     print(len(text_array))
     for line in text_array:
         vec.append(model.infer_vector(line).tolist())
-    
+
     return model,text_array,vec,original_text
 
 
@@ -168,26 +169,21 @@ def indexing():
     model,text_array,global_sen_vecs,original_text = docvecs(dump)
     print("Text array created")
     #return jsonify({'sentence_vectors': global_sen_vecs, 'text_array': text_array})
-
+    return ""
 @app.route('/senvec/searching/', methods=['POST'])
 def searching():
+    global model
+    global global_sen_vecs
     if not request.json or not 'query' in request.json:
         abort(400)
     query = request.json['query']
-    sen_vecs = request.json['sentence_vectors']
-    model = request.json['model']
     print(query)
     query_vec = model.infer_vector(query)
     #query_vec = form_query_vec(query,word_vectors)
     #Find distances and return top IDs
-    min_indices, min_dists = find_dists(np.array(query_vec),np.array(sen_vecs))
+    min_indices, min_dists = find_dists(np.array(query_vec),np.array(global_sen_vecs))
     orig = [original_text[i] for i in min_indices]
     return jsonify({'original_text': orig})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000,debug=True)
-
-
-
-
-
