@@ -29,13 +29,15 @@ function callback(tabs) {
               type: 'POST',
               url: url,
               data: JSON.stringify (data),
+              /*
               success: function(data) {
                   localStorage.setItem("mlvalue", data);
                   someVarName2 = localStorage.getItem("mlvalue");
                   console.log("success");
-                  console.log(JSON.stringify(someVarName2));
+                  console.log(data['sentence_vectors']);
+                  console.log(someVarName2);
                   document.getElementById('boo').disabled = false;
-              },
+              },*/
               contentType: "application/json",
               dataType: 'json'
           });
@@ -64,19 +66,22 @@ function callback(tabs) {
     someVarName2 = localStorage.getItem("mlvalue");
     console.log(someVarName2);
     var html = "";
-    var data = {dump:html};
-    var url = 'http://localhost:3000/ssss';
-
+    var data = {sen_vecs:someVarName2,query:input};
+    var url = 'http://localhost:3000/senvec/searching/';
+    var final;
     $.ajax({
         type: 'POST',
         url: url,
         data: JSON.stringify (data),
         success: function(data) {
-            localStorage.setItem("mlvalue", response.data);
-            someVarName2 = localStorage.getItem("mlvalue");
-            console.log("success");
-            console.log(someVarName2);
-            $( "#boo" ).toggle();
+            console.log(data);
+            final = data["original_text"];
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+              chrome.tabs.sendMessage(tabs[0].id, {greeting: final}, function(response) {
+                  console.log("hhhh");
+                console.log(response);
+              });
+            });
         },
         contentType: "application/json",
         dataType: 'json'
