@@ -30,10 +30,10 @@ function callback(tabs) {
               url: url,
               data: JSON.stringify (data),
               success: function(data) {
-                  localStorage.setItem("mlvalue", response.data);
+                  localStorage.setItem("mlvalue", data);
                   someVarName2 = localStorage.getItem("mlvalue");
                   console.log("success");
-                  console.log(someVarName2);
+                  console.log(JSON.stringify(someVarName2));
                   $( "#boo" ).toggle();
               },
               contentType: "application/json",
