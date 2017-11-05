@@ -1,4 +1,4 @@
-# NLSearch
+# Find++
 Natural Language Search
 Dependencies for app.py
 <br>gensim: pip install -e git+https://github.com/jhlau/gensim.git#egg=gensim </br>
