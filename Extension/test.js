@@ -24,8 +24,22 @@ function callback(tabs) {
           $( "#boo" ).toggle();
           var html_parsed = results[0];
           var data = {dump:html_parsed};
-          var url = 'http://localhost:3000/';
-
+          var url = 'http://localhost:3000/senvec/indexing/';
+          $.ajax({
+              type: 'POST',
+              url: url,
+              data: JSON.stringify (data),
+              success: function(data) {
+                  localStorage.setItem("mlvalue", response.data);
+                  someVarName2 = localStorage.getItem("mlvalue");
+                  console.log("success");
+                  console.log(someVarName2);
+                  $( "#boo" ).toggle();
+              },
+              contentType: "application/json",
+              dataType: 'json'
+          });
+          /*
           $http.post(url, data).then(function(response){
               if(response.data){
                   localStorage.setItem("mlvalue", response.data);
@@ -37,6 +51,7 @@ function callback(tabs) {
               }
               $( "#boo" ).toggle();
           });
+          */
       });
 
 
@@ -47,19 +62,23 @@ function callback(tabs) {
     var input = document.getElementById("boo").value;
     someVarName2 = localStorage.getItem("mlvalue");
     console.log(someVarName2);
+    var html = "";
+    var data = {dump:html};
+    var url = 'http://localhost:3000/ssss';
 
-    var data = {dump:html_parsed};
-    var url = 'http://localhost:3000/';
-
-    $http.post(url, data).then(function(response){
-        if(response.data){
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify (data),
+        success: function(data) {
             localStorage.setItem("mlvalue", response.data);
             someVarName2 = localStorage.getItem("mlvalue");
             console.log("success");
             console.log(someVarName2);
-        } else {
-            console.log("failure");
-        }
+            $( "#boo" ).toggle();
+        },
+        contentType: "application/json",
+        dataType: 'json'
     });
     console.log(input);
   });
