@@ -21,7 +21,7 @@ function callback(tabs) {
       }, (results) => {
           //Here we have just the innerHTML and not DOM structure
           console.log('Popup script:')
-          $( "#boo" ).toggle();
+          document.getElementById('boo').disabled = true;
           var html_parsed = results[0];
           var data = {dump:html_parsed};
           var url = 'http://localhost:3000/senvec/indexing/';
@@ -34,11 +34,12 @@ function callback(tabs) {
                   someVarName2 = localStorage.getItem("mlvalue");
                   console.log("success");
                   console.log(JSON.stringify(someVarName2));
-                  $( "#boo" ).toggle();
+                  document.getElementById('boo').disabled = false;
               },
               contentType: "application/json",
               dataType: 'json'
           });
+
           /*
           $http.post(url, data).then(function(response){
               if(response.data){

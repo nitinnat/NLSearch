@@ -2,21 +2,31 @@
 <html>
   <head>
       <style>
-      input[type=text] {
-            background-color: white;
-            background-image: url('searchicon.png');
-            background-position: 10px 10px;
-            background-repeat: no-repeat;
-            padding-left: 40px;
+      body {
+          width: 300px;
+          height: 165px;
+          background-color: #E2E2E2;
+      }
+      .text {
+          -webkit-box-sizing: content-box;
+          -moz-box-sizing: content-box;
+          box-sizing: content-box;
+          border: none;
+          font: normal 25px/1 "amaranth", Helvetica, sans-serif;
+          color: #121212;
+          text-align: center;
+          -o-text-overflow: ellipsis;
+          text-overflow: ellipsis;
         }
       </style>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <script src="jquery-3.2.1.min.js"></script>
   </head>
   <body>
+    <div style="margin-top:20px" class="text">Deep Find</div>
     <div class="container form-group">
-        <input name="name" class="form-control" id="boo" type="text"> </input>
-        <button class="btn btn-success" id="test">TEST!</button>
+        <input style="margin-top:20px" placeholder="search" name="name" class="container form-control" id="boo" type="text"> </input>
+        <button style="margin-left:80px; margin-top:20px" class="container btn btn-success" id="test">Get Context</button>
     </div>
     <script src="test.js"></script>
   </body>
