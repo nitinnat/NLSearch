@@ -10,3 +10,7 @@ Dependencies for app.py
 <br> Go to a new webpage, click the extension and wait for 15 seconds. </br>
 <br> Click the extension icon once again after that to search in Natural Language </br>
 <br> Your result will be printed in the pop up window. </br>
+
+#References
+Forked Gensim repository to obtain doc vectors from pretrained Glove word vectors: https://github.com/jhlau/gensim
+
