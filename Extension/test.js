@@ -6,6 +6,7 @@ function callback(tabs) {
 
 
   if (background.prevTab != currentTab) {
+
       background.prevTab = currentTab;
 
       function modifyDOM() {
@@ -20,18 +21,46 @@ function callback(tabs) {
       }, (results) => {
           //Here we have just the innerHTML and not DOM structure
           console.log('Popup script:')
+          $( "#boo" ).toggle();
           var html_parsed = results[0];
-          localStorage.setItem("mlvalue", html_parsed);
+          var data = {dump:html_parsed};
+          var url = 'http://localhost:3000/';
+
+          $http.post(url, data).then(function(response){
+              if(response.data){
+                  localStorage.setItem("mlvalue", response.data);
+                  someVarName2 = localStorage.getItem("mlvalue");
+                  console.log("success");
+                  console.log(someVarName2);
+              } else {
+                  console.log("failure");
+              }
+              $( "#boo" ).toggle();
+          });
       });
 
 
   }
-  someVarName2 = localStorage.getItem("mlvalue");
-  console.log(someVarName2);
 
   document.getElementById("test").addEventListener('click', () => {
     console.log("Popup DOM fully loaded and parsed");
     var input = document.getElementById("boo").value;
+    someVarName2 = localStorage.getItem("mlvalue");
+    console.log(someVarName2);
+
+    var data = {dump:html_parsed};
+    var url = 'http://localhost:3000/';
+
+    $http.post(url, data).then(function(response){
+        if(response.data){
+            localStorage.setItem("mlvalue", response.data);
+            someVarName2 = localStorage.getItem("mlvalue");
+            console.log("success");
+            console.log(someVarName2);
+        } else {
+            console.log("failure");
+        }
+    });
     console.log(input);
   });
 
