@@ -1,9 +1,7 @@
-#from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup
 from bs4.element import Comment
-from bs4 import BeautifulSoup as soup
-from urllib.request import urlopen as uRequest
-
-#myUrl = 'https://en.wikipedia.org/wiki/Wikipedia'
+import urllib
+import re
 
 
 def tag_visible(element):
@@ -20,7 +18,5 @@ def text_from_html(body):
     visible_texts = filter(tag_visible, texts)  
     return u" ".join(t.strip() for t in visible_texts)
 
-#When getting direct txt file for html, directly pass the object  
-#def parseWeb()
-html = uRequest('https://en.wikipedia.org/wiki/Wikipedia').read()
-print(text_from_html(html))
+html = PUT_HTML_DUMP_HERE
+html_parser = re.sub(r'[^\x00-\x7F]+','', text_from_html(html)).split(".")
