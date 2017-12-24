@@ -1,5 +1,7 @@
 # Find++
-Natural Language Search
+Find++ is a Chrome Extension that was built for UBHacking 2017, University at Buffalo's annual hackathon. 
+It performs Natural Language Search on a webpage using word and document embeddings.
+
 Dependencies for app.py
 <br>gensim: pip install -e git+https://github.com/jhlau/gensim.git#egg=gensim </br>
 <br>flask </br>
