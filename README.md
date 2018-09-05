@@ -1,7 +1,7 @@
 # Find++
 
 ## Introduction 
-* Sometimes, looking for keywords on a webpage just doesn't cut it. At this hackathon, we thought of developing something that can perform semantic search (passage similarity) based on the paragraphs that exist on a particular webpage.
+* Sometimes, looking for keywords on a webpage just doesn't cut it. Therefore, at the hackathon held at the University at Buffalo during Nov 2017, we thought of developing something that can perform semantic search (based on query-passage similarity) on the paragraphs that exist on a particular webpage.
 * Find++ is a Chrome Extension that was built for UBHacking 2017, University at Buffalo's annual hackathon. 
 * It performs Natural Language Search on a webpage using word and document embeddings.
 
