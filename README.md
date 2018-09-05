@@ -18,7 +18,7 @@
 * Your result will be printed in the pop up window. 
 
 ## Issues
-* Project development has been on a hiatus due to busy schedules. Hope to resume development soon. In the mean time, if this helps you in anyway, do freely clone it and use it freely. Do let me know if it was useful to you in anyway!
+* Project development has been on a hiatus due to busy schedules. Hope to resume development soon. In the mean time, if this helps you in anyway, do feel free to use the code. Do let me know if it was useful to you in anyway!
 
 ## References
 Forked Gensim repository to obtain doc vectors from pretrained Glove word vectors: https://github.com/jhlau/gensim
